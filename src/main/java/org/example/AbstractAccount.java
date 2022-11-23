@@ -2,6 +2,7 @@ package org.example;
 
 public abstract class AbstractAccount implements Account {
     protected int id;
+    protected String type;
     protected double balance;
     protected int rate;
     protected Client owner;
@@ -29,6 +30,7 @@ public abstract class AbstractAccount implements Account {
     public int getId() {
         return id;
     }
+    public String getType() { return type; }
     public double getBalance() {
         return balance;
     }

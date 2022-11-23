@@ -3,11 +3,13 @@ package org.example;
 public class DebitAccount extends AbstractAccount {
     private double overdraft = 0;
 
-    public DebitAccount(int id, double balance, int rate, Client owner) {
+    public DebitAccount(int id, String type, double balance, int rate, Client owner) {
         this.id = id;
+        this.type = type;
         this.balance = balance;
         this.rate = rate;
         this.owner = owner;
+        owner.listClientAccounts.add(this);
     }
 
     public double getOverdraft() {
@@ -51,5 +53,11 @@ public class DebitAccount extends AbstractAccount {
             addMoney(balance * rate / 100);
         }
     };
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() +
+                " { id=" + id + ", balance=" + balance + ", rate=" + rate + ", owner=" + owner + " }";
+    }
 
 }

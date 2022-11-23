@@ -3,12 +3,14 @@ package org.example;
 public class CreditAccount extends AbstractAccount {
     private double limit = 0;
 
-    public CreditAccount(int id, double limit, int rate, Client owner) {
+    public CreditAccount(int id, String type, double limit, int rate, Client owner) {
         this.id = id;
+        this.type = type;
         this.balance = limit;
         this.limit = limit;
         this.rate = rate;
         this.owner = owner;
+        owner.listClientAccounts.add(this);
     }
 
     public double getLimit() {
@@ -35,13 +37,13 @@ public class CreditAccount extends AbstractAccount {
         return false;
     };
 
-    @Override
+    @Override// вообще-то с кредитного счета можно только оплачивать (хотя есть исключения по банкам)
     public boolean transferMoney(double money, Account transferAccount) {
-        if (isTransactionValid(money) && balance - money >= 0 && limit >= money) {
+        /*if (isTransactionValid(money) && balance - money >= 0 && limit >= money) {
             withdrawMoney(money);
             transferAccount.addMoney(money);
             return true;
-        }
+        }*/
         return false;
     };
 
@@ -52,5 +54,10 @@ public class CreditAccount extends AbstractAccount {
         }
     };
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() +
+                " { id=" + id + ", balance=" + balance + ", rate=" + rate + ", owner=" + owner + " }";
+    }
 
 }

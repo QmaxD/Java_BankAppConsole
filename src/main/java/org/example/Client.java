@@ -1,9 +1,13 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Client {
     private int id;
     private String name;
     private String password;
+    public List<AbstractAccount> listClientAccounts = new ArrayList<>();
 
     public Client(int id, String name, String password) {
         this.id = id;
